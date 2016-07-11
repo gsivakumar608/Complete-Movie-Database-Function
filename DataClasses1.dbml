@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Lab6_DB" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\Lab6_DB.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="WindowsFormsApplication2.Properties.Settings" SettingsPropertyName="Lab6_DBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.GENRES" Member="GENREs">
+    <Type Name="GENRE">
+      <Column Name="MOVIEGENRE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MOVIE_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GENRE" Member="GENRE1" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Association Name="MOVy_GENRE" Member="MOVy" ThisKey="MOVIE_ID" OtherKey="MOVIE_ID" Type="MOVy" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MAKERS" Member="MAKERs">
+    <Type Name="MAKER">
+      <Column Name="MAKER_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MAKER_NAME" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="GENDER" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NATIONALITY" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="BIRTH_YEAR" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MAKER_MOVIEMAKER" Member="MOVIEMAKERs" ThisKey="MAKER_ID" OtherKey="MAKER_ID" Type="MOVIEMAKER" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MOVIEMAKERS" Member="MOVIEMAKERs">
+    <Type Name="MOVIEMAKER">
+      <Column Name="MOVIEMAKER_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MOVIE_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MAKER_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MOVIE_ROLE" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Association Name="MAKER_MOVIEMAKER" Member="MAKER" ThisKey="MAKER_ID" OtherKey="MAKER_ID" Type="MAKER" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="MOVy_MOVIEMAKER" Member="MOVy" ThisKey="MOVIE_ID" OtherKey="MOVIE_ID" Type="MOVy" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MOVIES" Member="MOVies">
+    <Type Name="MOVy">
+      <Column Name="MOVIE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TITLE" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="RELEASE_YEAR" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SPOKEN_LANGUAGE" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="RATING" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="MOVy_GENRE" Member="GENREs" ThisKey="MOVIE_ID" OtherKey="MOVIE_ID" Type="GENRE" />
+      <Association Name="MOVy_MOVIEMAKER" Member="MOVIEMAKERs" ThisKey="MOVIE_ID" OtherKey="MOVIE_ID" Type="MOVIEMAKER" />
+    </Type>
+  </Table>
+</Database>
